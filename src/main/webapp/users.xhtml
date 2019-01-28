@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="#{layoutMB.layout}">
+
+    <ui:define name="head-end">
+        <ui:param name="renderBreadCrumb" value="true"/>
+    </ui:define>
+
+    <ui:define name="title">
+
+    </ui:define>
+    <ui:define name="body">
+
+        <div class="box box-primary">
+            <div class="box-header with-border">
+
+                <h:form id="ButtonsForm">
+                    <p:splitButton value="New" action="car-form?faces-redirect=true"
+                                   icon="fa fa-plus"
+                                   styleClass="hidden-md hidden-lg btn-primary">
+                        <p:menuitem value="Delete Selected" 
+                                    process="@this" update="@form" 
+                                    icon="fa fa-trash">
+                            <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger"/>
+                        </p:menuitem>
+                        <p:menuitem value="Search" update="@(.ui-dialog)"
+                                    oncomplete="PF('searchDialog').show()"
+                                    icon="fa fa-search"/>
+                        <p:menuitem value="Clear" update="@(.ui-dialog, .ui-datatable)" process="@form"
+                                    icon="fa fa-refresh"/>
+                    </p:splitButton>
+                </h:form>
+                <p:separator/>
+                <p:panel id="spanel"   style="background: transparent;  position: relative; border: none">
+                    <h:panelGrid columns="1">
+                        <p:growl id="msgs1" sticky="true" showDetail="true" />
+                        <p:tabView  styleClass="si-icon-16x16 si-icon-edit"  style="background: transparent; width: 100%; height: 100%; border: 0" id="usersTabView"> 
+                            <p:tab title="MANAGE SYSTEM USERS" >
+                                <h:form id="userForm" style="width: auto" > 
+                                    <h:panelGrid columns="1" >
+                                        <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-8"
+                                                     layout="grid" >
+                                            <p:outputLabel value="Name"/>
+                                            <p:inputText    value="#{acc.user.name}" />
+                                            <p:outputLabel value="Mobile phone"/>
+                                            <p:inputText      value="#{acc.user.phone}" />
+                                            <p:outputLabel value="Staff ID"/>
+                                            <p:inputText      value="#{acc.user.staffID}" />
+
+                                            <p:outputLabel value="Group ID"/>
+                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{acc.user.groupID}"  style="width: 200px" >
+                                                <f:selectItem itemLabel=" " itemValue="" noSelectionOption="true" />
+                                                <f:selectItems value="#{acc.usergroupList}"  var="group" itemValue="#{group.idgroups}" itemLabel="#{group.name}" />
+                                            </p:selectOneMenu>
+                                            <p:outputLabel value="Username"/>
+                                            <p:inputText      value="#{acc.user.username}" />
+                                            <p:outputLabel value="Email address"/>
+                                            <p:inputText    type="email"  value="#{acc.user.email}" />
+                                            <p:messages for="userForm"  showDetail="true" />
+                                        </p:panelGrid>
+                                        <h:panelGrid columns="8">
+                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{acc.createUser}" />
+                                            <p:commandButton value="LOGOUT"   action="#{acc.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                </h:form>
+                            </p:tab>
+                            <p:tab title="CREATED USERS">
+                                <h:form id="createdUsers" style="width: auto" >
+                                    <p:dataTable var="users" value="#{acc.userList}" widgetVar="usersTable"
+                                                 paginator="true" rows="10"
+
+                                                 style="background: transparent; font-size:11px"
+                                                 id="usersTable"
+                                                 emptyMessage="No users found with given criteria" filteredValue="#{acc.userList}">
+                                        <p:column filterBy="#{users.name}" sortBy="#{users.name}" headerText="Name">
+                                            <p:outputLabel value="#{users.name}" />
+                                        </p:column>
+                                        <p:column filterBy="#{users.email}" sortBy="#{users.email}" headerText="Email Address">
+                                            <p:outputLabel value="#{users.email}" />
+                                        </p:column>
+                                        <p:column filterBy="#{users.phone}" sortBy="#{users.phone}" headerText="phone">
+                                            <p:outputLabel value="#{users.phone}" />
+                                        </p:column>
+                                        <p:column filterBy="#{users.username}" sortBy="#{users.username}" headerText="username">
+                                            <p:outputLabel value="#{users.username}" />
+                                        </p:column>
+                                        <p:column  sortBy="#{users.groupID}"  filterBy="#{users.groupID}" headerText ="Group">
+                                            <p:outputLabel value="#{users.groupID}"  style="display: block; color:GREEN" />
+                                        </p:column>
+                                        <p:column style="width:4%">
+                                            <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit" update=":editForm:userDetail" oncomplete="PF('userDialog').show()"  value="DETAILS"   title="Edit  #{users.name}'s DETAILS">                                                  
+                                                <f:setPropertyActionListener value="#{users}"   target="#{acc.user}" />  
+                                            </p:commandLink>
+                                        </p:column>
+                                        <p:column style="width:4%" headerText="Sessions">
+                                            <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit" update=":editForm:sessionDetail" oncomplete="PF('sessionDialog').show()"  value="DETAILS"   title="Assign  #{users.name}'s to a working session">                                                  
+                                                <f:setPropertyActionListener value="#{users}"   target="#{acc.user}" />  
+                                            </p:commandLink>
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:form>
+                            </p:tab>
+                        </p:tabView>
+                        <h:form id="editForm">
+                            <p:dialog header="USER" dynamic="true" widgetVar="userDialog" showEffect="clip"   hideEffect="explode" resizable="false">
+                                <p:outputPanel id="userDetail" style="text-align:center;">  
+                                    <h:panelGrid columns="1">
+                                        <h:panelGrid columns="4">
+                                            <p:outputLabel value="Name"/>
+                                            <p:inputText    value="#{acc.user.name}" />
+                                            <p:outputLabel value="Mobile phone"/>
+                                            <p:inputText      value="#{acc.user.phone}" />
+                                            <p:outputLabel value="Staff ID"/>
+                                            <p:inputText      value="#{acc.user.staffID}" />
+                                            <p:outputLabel value="Group ID"/>
+                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{acc.user.groupID}"  style="width: 200px" >
+                                                <f:selectItem itemLabel=" " itemValue="" noSelectionOption="true" />
+                                                <f:selectItems value="#{acc.usergroupList}"  var="group" itemValue="#{group.idgroups}" itemLabel="#{group.name}" />
+                                            </p:selectOneMenu>
+                                            <p:outputLabel value="Group ID"/>
+                                            <p:inputText      value="#{acc.user.email}" />
+                                            <p:outputLabel value="Username"/>
+                                            <p:inputText      value="#{acc.user.username}" />
+                                            <p:outputLabel value="Email address"/>
+                                            <p:inputText      value="#{acc.user.email}" />
+                                            <p:outputLabel value="Session"/>
+                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{acc.user.sessionid}"  style="width: 200px" >
+                                                <f:selectItem itemLabel=" " itemValue="" noSelectionOption="true" />
+                                                <f:selectItems value="#{acc.sessionList}"  var="group" itemValue="#{group.idsession}" itemLabel="#{group.startstime}" />
+                                            </p:selectOneMenu>
+                                            <p:messages for="userForm"  showDetail="true" />
+                                        </h:panelGrid>
+                                        <h:panelGrid columns="8">
+                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{acc.updateUser()}" />
+                                            <p:commandButton value="LOGOUT"   action="#{acc.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </p:dialog>
+                            <p:dialog header="SESSION" dynamic="true" widgetVar="sessionDialog" showEffect="clip"   hideEffect="explode" resizable="false">
+                                <p:outputPanel id="sessionDetail" style="text-align:center;">  
+                                    <h:panelGrid columns="1">
+                                        <h:panelGrid columns="4">
+                                            <p:outputLabel value="Name"/>
+                                            <p:inputText    value="#{acc.user.name}" />
+                                            <p:outputLabel value="Mobile phone"/>
+                                            <p:inputText      value="#{acc.user.phone}" />
+                                            <p:outputLabel value="Session"/>
+                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{acc.user.sessionid}"  style="width: 200px" >
+                                                <f:selectItem itemLabel=" " itemValue="" noSelectionOption="true" />
+                                                <f:selectItems value="#{acc.sessionList}"  var="group" itemValue="#{group.idsession}" itemLabel="#{group.startstime}" />
+                                            </p:selectOneMenu>
+                                            <p:messages for="userForm"  showDetail="true" />
+                                        </h:panelGrid>
+                                        <h:panelGrid columns="8">
+                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{acc.updateUser}" />
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </p:dialog>
+                        </h:form>
+                    </h:panelGrid>
+                </p:panel>
+            </div>
+        </div>
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-danger">
+            <p:commandButton value="Yes" type="button" styleClass="btn-primary ui-confirmdialog-yes"
+                             icon="fa fa-check"/>
+            <p:commandButton value="No" type="button" styleClass="btn-danger ui-confirmdialog-no"
+                             icon="fa fa-close"/>
+        </p:confirmDialog>
+
+        <script type="text/javascript">
+            /*if ('serviceWorker' in navigator) {
+             navigator.serviceWorker.register('sw.js');
+             }*/
+
+
+            if ('serviceWorker' in navigator) {
+                /*  navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                 for (let registration of registrations) {
+                 registration.unregister()
+                 }
+                 });*/
+
+                window.addEventListener('load', function () {
+                    navigator.serviceWorker.register('sw.js').then(function (registration) {
+                        // Registration was successful
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    }, function (err) {
+                        // registration failed :(
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+                });
+            }
+        </script>
+    </ui:define>
+
+
+</ui:composition>

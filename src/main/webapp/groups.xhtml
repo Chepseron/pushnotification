@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="#{layoutMB.layout}">
+
+    <ui:define name="head-end">
+        <ui:param name="renderBreadCrumb" value="true"/>
+    </ui:define>
+
+    <ui:define name="title">
+    </ui:define>
+    <ui:define name="body">
+
+        <div class="box box-primary">
+            <div class="box-header with-border">
+
+                <h:form id="ButtonsForm">
+                    <p:splitButton value="New" action="car-form?faces-redirect=true"
+                                   icon="fa fa-plus"
+                                   styleClass="hidden-md hidden-lg btn-primary">
+                        <p:menuitem value="Delete Selected" 
+                                    process="@this" update="@form" 
+                                    icon="fa fa-trash">
+                            <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger"/>
+                        </p:menuitem>
+                        <p:menuitem value="Search" update="@(.ui-dialog)"
+                                    oncomplete="PF('searchDialog').show()"
+                                    icon="fa fa-search"/>
+                        <p:menuitem value="Clear" update="@(.ui-dialog, .ui-datatable)" process="@form"
+                                    icon="fa fa-refresh"/>
+                    </p:splitButton>
+                </h:form>
+                <p:separator/>
+
+                <p:panel id="spanel"   style="background: transparent;  position: relative; border: none">
+                    <h:panelGrid columns="1">
+                        <p:growl id="msgs1" sticky="true" showDetail="true" />
+                        <p:tabView  styleClass="si-icon-16x16 si-icon-edit"  style="background: transparent; width: 100%; height: 100%; border: 0" >  
+                            <p:tab title="MANAGE USER GROUPS" >
+                                <h:form id="activityForm" style="width: auto" > 
+                                    <h:panelGrid columns="1" >
+                                        <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-8"
+                                                     layout="grid" styleClass="ui-fluid card">
+                                            <p:outputLabel value="Group Name"/>
+                                            <p:inputText   style="width:200px" required="true" requiredMessage="missing usergroup name"  value="#{acc.usergroup.name}" />
+
+
+                                            <p:messages for="userForm"  showDetail="true" />
+                                        </p:panelGrid>
+                                        <h:panelGrid columns="8">
+                                            <p:commandButton value="LOGOUT"   action="#{acc.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
+                                            <p:commandButton value="SUBMIT"   action="#{acc.createUsergroup}"  icon="fa fa-sign-out" styleClass="btn-primary" />
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                </h:form>
+                            </p:tab>
+                            <p:tab title="CREATED GROUPS">
+                                <h:form id="budgetForm" style="width: auto" >
+                                    <p:dataTable var="usergroups" value="#{acc.usergroupList}" 
+                                                 paginator="true" rows="10"
+                                                 editable="true"
+                                                 style="background: transparent; font-size:11px"
+                                                 id="activitysTable"
+                                                 emptyMessage="No group found with given criteria" filteredValue="#{acc.usergroupList}">
+                                        <p:column filterBy="#{usergroups.name}" sortBy="#{usergroups.name}" headerText="name">
+                                            <p:outputLabel value="#{usergroups.name}" />
+                                        </p:column>
+                                        <p:column filterBy="#{usergroups.responsibilities}" sortBy="#{usergroups.responsibilities}" headerText="Variance">
+                                            <p:outputLabel value="#{usergroups.responsibilities}" />
+                                        </p:column>
+                                        <p:column style="width:4%">
+                                            <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit" update=":editForm:usergroupDetail" oncomplete="PF('usergroupDialog').show()"  value="DETAILS"   title="Edit  #{usergroups.name}'s DETAILS">                                                  
+                                                <f:setPropertyActionListener value="#{usergroups}"   target="#{acc.usergroup}" />  
+                                            </p:commandLink>
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:form>
+                            </p:tab>
+                        </p:tabView>
+                        <h:form id="editForm">
+                            <p:dialog header="Groups" dynamic="true" widgetVar="usergroupDialog" showEffect="clip"   hideEffect="explode" resizable="false">
+                                <p:outputPanel id="usergroupDetail" style="text-align:center;">  
+
+                                    <h:panelGrid columns="1">
+                                        <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-8"
+                                                     layout="grid" styleClass="ui-fluid card">
+                                            <p:outputLabel value="Group Name"/>
+                                            <p:inputText   style="width:200px" required="true" requiredMessage="missing usergroup name"  value="#{acc.usergroup.name}" />
+                                            <p:outputLabel value="Status"/>
+                                            <p:selectOneMenu filter="true" filterMatchMode="startsWith" required="true" requiredMessage="missing status"  converter="#{convertor}"  immediate="true" editable="true" value="#{acc.usergroup.statusID}"  style="width: 200px" >
+                                                <f:selectItem itemLabel=" " itemValue="" noSelectionOption="true" />
+                                                <f:selectItems value="#{acc.statusList}"  var="usergroup" itemValue="#{usergroup}" itemLabel="#{usergroup.name}" />
+                                            </p:selectOneMenu>
+                                            <p:outputLabel value="Roles"/>
+                                            <p:inputTextarea   style="width:200px" required="true" requiredMessage="missing responsibilities"  value="#{acc.usergroup.responsibilities}" />
+                                            <p:messages for="userForm"  showDetail="true" />
+                                        </p:panelGrid>
+                                        <h:panelGrid columns="8">
+                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{acc.updateUsergroup}" />
+                                            <p:commandButton value="LOGOUT"   action="#{acc.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+
+                                </p:outputPanel>
+                            </p:dialog>
+                        </h:form>
+                    </h:panelGrid>
+                </p:panel>
+            </div>
+        </div>
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-danger">
+            <p:commandButton value="Yes" type="button" styleClass="btn-primary ui-confirmdialog-yes"
+                             icon="fa fa-check"/>
+            <p:commandButton value="No" type="button" styleClass="btn-danger ui-confirmdialog-no"
+                             icon="fa fa-close"/>
+        </p:confirmDialog>
+
+        <script type="text/javascript">
+            /*if ('serviceWorker' in navigator) {
+             navigator.serviceWorker.register('sw.js');
+             }*/
+
+
+            if ('serviceWorker' in navigator) {
+                /*  navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                 for (let registration of registrations) {
+                 registration.unregister()
+                 }
+                 });*/
+
+                window.addEventListener('load', function () {
+                    navigator.serviceWorker.register('sw.js').then(function (registration) {
+                        // Registration was successful
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    }, function (err) {
+                        // registration failed :(
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+                });
+            }
+        </script>
+    </ui:define>
+
+
+</ui:composition>

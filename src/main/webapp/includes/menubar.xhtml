@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ul class="nav navbar-nav">
+        <li>
+            <p:link href="/index2.xhtml" onclick="clearBreadCrumbs()">
+                <i class="fa fa-home"></i>
+                <span>Home</span>
+            </p:link>
+        </li>
+        <li class="header">
+            MPESA PUSH NOTIFICATIONS
+        </li>
+        <li>
+            <p:link href="/outlets.xhtml" >
+                <i class="fa  fa-plug"></i>
+                <span>Outlets</span>
+            </p:link>
+        </li>
+
+
+        <li>
+            <p:link href="/transactions.xhtml">
+                <i class="fa fa-exchange"></i>
+                <span>Transactions</span>
+            </p:link>
+        </li>
+
+        <li class="header">
+            USER MANAGEMENT
+        </li>
+        <li>
+            <p:link href="/users.xhtml" >
+                <i class="fa fa-user"></i>
+                <span>REGISTER USERS</span>
+            </p:link>
+        </li>
+        <li>
+            <p:link href="/status.xhtml" >
+                <i class="fa  fa-hourglass-2"></i>
+                <span>STATUS</span>
+            </p:link>
+        </li>
+        <li>
+            <p:link href="/groups.xhtml" > 
+                <i class="fa fa-object-ungroup"></i>
+                <span>USER GROUPS</span>
+            </p:link>
+        </li>
+
+    </ul>
+
+</ui:composition>
