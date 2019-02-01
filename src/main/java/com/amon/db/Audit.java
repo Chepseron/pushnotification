@@ -24,18 +24,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author FAZOUL
+ * @author amon.sabul
  */
 @Entity
 @Table(name = "audit")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Audit.findAll", query = "SELECT a FROM Audit a"),
-    @NamedQuery(name = "Audit.findByIdaudit", query = "SELECT a FROM Audit a WHERE a.idaudit = :idaudit"),
-    @NamedQuery(name = "Audit.findByTimer", query = "SELECT a FROM Audit a WHERE a.timer = :timer"),
-    @NamedQuery(name = "Audit.findByCreatedby", query = "SELECT a FROM Audit a WHERE a.createdby = :createdby"),
-    @NamedQuery(name = "Audit.findByAction", query = "SELECT a FROM Audit a WHERE a.action = :action")})
+    @NamedQuery(name = "Audit.findAll", query = "SELECT a FROM Audit a")
+    , @NamedQuery(name = "Audit.findByIdaudit", query = "SELECT a FROM Audit a WHERE a.idaudit = :idaudit")
+    , @NamedQuery(name = "Audit.findByTimer", query = "SELECT a FROM Audit a WHERE a.timer = :timer")
+    , @NamedQuery(name = "Audit.findByCreatedby", query = "SELECT a FROM Audit a WHERE a.createdby = :createdby")
+    , @NamedQuery(name = "Audit.findByAction", query = "SELECT a FROM Audit a WHERE a.action = :action")})
 public class Audit implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

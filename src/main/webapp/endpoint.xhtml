@@ -31,52 +31,44 @@
                     </p:splitButton>
                 </h:form>
                 <p:separator/>
-               <p:panel id="spanel"   style="background: transparent;  position: relative; border: none">
+                <p:panel id="spanel"   style="background: transparent;  position: relative; border: none">
                     <h:panelGrid columns="1">
                         <p:growl id="msgs1" sticky="true" showDetail="true" />
-                        <p:tabView  styleClass="si-icon-16x16 si-icon-edit"  style="background: transparent; width: 100%; height: 100%; border: 0" id="outletsTabView"> 
-                            <p:tab title="MANAGE OUTLETS" >
-                                <h:form id="outletForm" style="width: auto" > 
+                        <p:tabView  styleClass="si-icon-16x16 si-icon-edit"  style="background: transparent; width: 100%; height: 100%; border: 0" id="endpointsTabView"> 
+                            <p:tab title="MANAGE PRINTER ENDPOINT" >
+                                <h:form id="endpointForm" style="width: auto" > 
                                     <h:panelGrid columns="1" >
                                         <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-8"
                                                      layout="grid" >
-                                            <p:outputLabel value="Outlet name"/>
-                                            <p:inputText      value="#{push.outlet.outletname}" />
-                                            <p:outputLabel value="Address"/>
-                                            <p:inputText    value="#{push.outlet.address}" />
-                                            <p:messages for="outletForm"  showDetail="true" />
+                                            <p:outputLabel value="Endpoint name"/>
+                                            <p:inputText      value="#{push.endpoint.endpointName}" />
+                                            <p:outputLabel value="URL"/>
+                                            <p:inputText    value="#{push.endpoint.urltoendpoint}" />
+                                            <p:messages for="endpointForm"  showDetail="true" />
                                         </p:panelGrid>
                                         <h:panelGrid columns="8">
-                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{push.createOutlet}" />
+                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{push.createEndpoint}" />
                                             <p:commandButton value="LOGOUT"   action="#{push.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
                                         </h:panelGrid>
                                     </h:panelGrid>
                                 </h:form>
                             </p:tab>
-                            <p:tab title="CREATED OUTLETS">
+                            <p:tab title="CREATED PRINTER ENDPOINT">
                                 <h:form id="createdUsers" style="width: auto" >
-                                    <p:dataTable var="outlets" value="#{push.outletList}" widgetVar="outletsTable"
+                                    <p:dataTable var="endpoints" value="#{push.endpointList}" widgetVar="endpointsTable"
                                                  paginator="true" rows="10"
-
                                                  style="background: transparent; font-size:11px"
-                                                 id="outletsTable"
-                                                 emptyMessage="No outlets found with given criteria" filteredValue="#{push.outletList}">
-                                        <p:column filterBy="#{outlets.outletname}" sortBy="#{outlets.outletname}" headerText="Name">
-                                            <p:outputLabel value="#{outlets.outletname}" />
+                                                 id="endpointsTable"
+                                                 emptyMessage="No endpoints found with given criteria" filteredValue="#{push.endpointList}">
+                                        <p:column filterBy="#{endpoints.endpointName}" sortBy="#{endpoints.endpointName}" headerText="Name">
+                                            <p:outputLabel value="#{endpoints.endpointName}" />
                                         </p:column>
-                                        <p:column filterBy="#{outlets.address}" sortBy="#{outlets.address}" headerText="Address">
-                                            <p:outputLabel value="#{outlets.address}" />
+                                        <p:column filterBy="#{endpoints.urltoendpoint}" sortBy="#{endpoints.urltoendpoint}" headerText="url">
+                                            <p:outputLabel value="#{endpoints.urltoendpoint}" />
                                         </p:column>
-                                        <p:column filterBy="#{outlets.createdBy}" sortBy="#{outlets.createdBy}" headerText="Created BY">
-                                            <p:outputLabel value="#{outlets.createdBy}" />
-                                        </p:column>
-                                        <p:column filterBy="#{outlets.createdOn}" sortBy="#{outlets.createdOn}" headerText="created On">
-                                            <p:outputLabel value="#{outlets.createdOn}" />
-                                        </p:column>
-
                                         <p:column >
-                                            <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit" update=":editForm:outletDetail" oncomplete="PF('outletDialog').show()"  value="DETAILS"   title="Edit  #{outlets.outletname}'s DETAILS">                                                  
-                                                <f:setPropertyActionListener value="#{outlets}"   target="#{push.outlet}" />  
+                                            <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit" update=":editForm:endpointDetail" oncomplete="PF('endpointDialog').show()"  value="DETAILS"   title="Edit  #{endpoints.endpointName}'s DETAILS">                                                  
+                                                <f:setPropertyActionListener value="#{endpoints}"   target="#{push.endpoint}" />  
                                             </p:commandLink>
                                         </p:column>
                                     </p:dataTable>
@@ -84,19 +76,19 @@
                             </p:tab>
                         </p:tabView>
                         <h:form id="editForm">
-                            <p:dialog header="Outlet" dynamic="true" widgetVar="outletDialog" showEffect="clip"   hideEffect="explode" resizable="false">
-                                <p:outputPanel id="outletDetail" style="text-align:center;">  
+                            <p:dialog header="ENDPOINT" dynamic="true" widgetVar="endpointDialog" showEffect="clip"   hideEffect="explode" resizable="false">
+                                <p:outputPanel id="endpointDetail" style="text-align:center;">  
                                     <h:panelGrid columns="1" >
-                                        <p:panelGrid columns="4" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                                        <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-8"
                                                      layout="grid" >
-                                            <p:outputLabel value="Outlet name"/>
-                                            <p:inputText      value="#{push.outlet.outletname}" />
-                                            <p:outputLabel value="Address"/>
-                                            <p:inputText    value="#{push.outlet.address}" />
-                                            <p:messages for="outletForm"  showDetail="true" />
+                                            <p:outputLabel value="Endpoint name"/>
+                                            <p:inputText      value="#{push.endpoint.endpointName}" />
+                                            <p:outputLabel value="URL"/>
+                                            <p:inputText    value="#{push.endpoint.urltoendpoint}" />
+                                            <p:messages for="endpointForm"  showDetail="true" />
                                         </p:panelGrid>
                                         <h:panelGrid columns="8">
-                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{push.updateOutlet}" />
+                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{push.updateEndpoint}" />
                                             <p:commandButton value="LOGOUT"   action="#{push.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
                                         </h:panelGrid>
                                     </h:panelGrid>

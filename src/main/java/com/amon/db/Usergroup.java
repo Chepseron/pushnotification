@@ -25,18 +25,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author FAZOUL
+ * @author amon.sabul
  */
 @Entity
 @Table(name = "usergroup")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usergroup.findAll", query = "SELECT u FROM Usergroup u"),
-    @NamedQuery(name = "Usergroup.findByIdgroups", query = "SELECT u FROM Usergroup u WHERE u.idgroups = :idgroups"),
-    @NamedQuery(name = "Usergroup.findByName", query = "SELECT u FROM Usergroup u WHERE u.name = :name"),
-    @NamedQuery(name = "Usergroup.findByCreatedAt", query = "SELECT u FROM Usergroup u WHERE u.createdAt = :createdAt"),
-    @NamedQuery(name = "Usergroup.findByResponsibilities", query = "SELECT u FROM Usergroup u WHERE u.responsibilities = :responsibilities")})
+    @NamedQuery(name = "Usergroup.findAll", query = "SELECT u FROM Usergroup u")
+    , @NamedQuery(name = "Usergroup.findByIdgroups", query = "SELECT u FROM Usergroup u WHERE u.idgroups = :idgroups")
+    , @NamedQuery(name = "Usergroup.findByName", query = "SELECT u FROM Usergroup u WHERE u.name = :name")
+    , @NamedQuery(name = "Usergroup.findByCreatedAt", query = "SELECT u FROM Usergroup u WHERE u.createdAt = :createdAt")
+    , @NamedQuery(name = "Usergroup.findByResponsibilities", query = "SELECT u FROM Usergroup u WHERE u.responsibilities = :responsibilities")})
 public class Usergroup implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

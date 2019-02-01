@@ -45,14 +45,14 @@
                                         <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-8"
                                                      layout="grid" >
                                             <p:outputLabel value="Name"/>
-                                            <p:inputText   style="width:200px"   value="#{acc.status.name}" />
+                                            <p:inputText   style="width:200px"   value="#{push.status.name}" />
                                             <p:outputLabel value="Description"/>
-                                            <p:inputTextarea   style="width:200px"   value="#{acc.status.description}" />
+                                            <p:inputTextarea   style="width:200px"   value="#{push.status.description}" />
                                             <p:messages for="userForm"  showDetail="true" />
                                         </p:panelGrid>
                                         <h:panelGrid columns="8">
-                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{acc.createStatus()}" />
-                                            <p:commandButton value="LOGOUT"   action="#{acc.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
+                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{push.createStatus()}" />
+                                            <p:commandButton value="LOGOUT"   action="#{push.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
                                         </h:panelGrid>
                                     </h:panelGrid>
 
@@ -60,12 +60,12 @@
                             </p:tab>
                             <p:tab title="CREATED STATUS">
                                 <h:form id="deptForm" style="width: auto" >
-                                    <p:dataTable var="stat" value="#{acc.statusList}" 
+                                    <p:dataTable var="stat" value="#{push.statusList}" 
                                                  paginator="true" rows="10"
                                                  editable="true"
                                                  style="background: transparent; font-size:11px"
                                                  id="activitysTable"
-                                                 emptyMessage="No activityd animals found with given criteria" filteredValue="#{acc.statusList}">
+                                                 emptyMessage="No activityd animals found with given criteria" filteredValue="#{push.statusList}">
 
                                         <p:column filterBy="#{stat.name}" sortBy="#{stat.name}" headerText="Name">
                                             <p:outputLabel value="#{stat.name}" />
@@ -74,9 +74,9 @@
                                             <p:outputLabel value="#{stat.description}" />
                                         </p:column>
 
-                                        <p:column style="width:4%">
+                                        <p:column >
                                             <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit" update=":editForm:statDetail" oncomplete="PF('statDialog').show()"  value="DETAILS"   title="Edit  #{stat.name}'s DETAILS">                                                  
-                                                <f:setPropertyActionListener value="#{stat}"   target="#{acc.status}" />  
+                                                <f:setPropertyActionListener value="#{stat}"   target="#{push.status}" />  
                                             </p:commandLink>
                                         </p:column>
                                     </p:dataTable>
@@ -90,14 +90,14 @@
                                         <h:panelGrid columns="1" >
                                             <h:panelGrid columns="4">
                                                 <p:outputLabel value="Status name"/>
-                                                <p:inputText   style="width:200px"   value="#{acc.status.name}" />
+                                                <p:inputText   style="width:200px"   value="#{push.status.name}" />
                                                 <p:outputLabel value="Description"/>
-                                                <p:inputTextarea   style="width:200px"   value="#{acc.status.description}" />
+                                                <p:inputTextarea   style="width:200px"   value="#{push.status.description}" />
                                                 <p:messages for="activityForm3"  showDetail="true" />
                                             </h:panelGrid>
                                             <h:panelGrid columns="8">
-                                                <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{acc.createStatus()}" />
-                                                <p:commandButton value="LOGOUT"   action="#{acc.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
+                                                <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{push.createStatus()}" />
+                                                <p:commandButton value="LOGOUT"   action="#{push.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
                                             </h:panelGrid>
                                         </h:panelGrid>
                               

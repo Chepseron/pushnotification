@@ -30,28 +30,29 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
- * @author FAZOUL
+ * @author amon.sabul
  */
 @Entity
 @Table(name = "user")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findByIdusers", query = "SELECT u FROM User u WHERE u.idusers = :idusers"),
-    @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
-    @NamedQuery(name = "User.findByPword", query = "SELECT u FROM User u WHERE u.pword = :pword"),
-    @NamedQuery(name = "User.findByCreatedAt", query = "SELECT u FROM User u WHERE u.createdAt = :createdAt"),
-    @NamedQuery(name = "User.findByLastLogin", query = "SELECT u FROM User u WHERE u.lastLogin = :lastLogin"),
-    @NamedQuery(name = "User.findByDepartment", query = "SELECT u FROM User u WHERE u.department = :department"),
-    @NamedQuery(name = "User.findByGroupID", query = "SELECT u FROM User u WHERE u.groupID = :groupID"),
-    @NamedQuery(name = "User.findByName", query = "SELECT u FROM User u WHERE u.name = :name"),
-    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
-    @NamedQuery(name = "User.findByPhone", query = "SELECT u FROM User u WHERE u.phone = :phone"),
-    @NamedQuery(name = "User.findByStaffID", query = "SELECT u FROM User u WHERE u.staffID = :staffID"),
-    @NamedQuery(name = "User.findByStatusID", query = "SELECT u FROM User u WHERE u.statusID = :statusID"),
-    @NamedQuery(name = "User.findByCreatedBy", query = "SELECT u FROM User u WHERE u.createdBy = :createdBy"),
-    @NamedQuery(name = "User.findBySessionid", query = "SELECT u FROM User u WHERE u.sessionid = :sessionid")})
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+    , @NamedQuery(name = "User.findByIdusers", query = "SELECT u FROM User u WHERE u.idusers = :idusers")
+    , @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
+    , @NamedQuery(name = "User.findByPword", query = "SELECT u FROM User u WHERE u.pword = :pword")
+    , @NamedQuery(name = "User.findByCreatedAt", query = "SELECT u FROM User u WHERE u.createdAt = :createdAt")
+    , @NamedQuery(name = "User.findByLastLogin", query = "SELECT u FROM User u WHERE u.lastLogin = :lastLogin")
+    , @NamedQuery(name = "User.findByDepartment", query = "SELECT u FROM User u WHERE u.department = :department")
+    , @NamedQuery(name = "User.findByGroupID", query = "SELECT u FROM User u WHERE u.groupID = :groupID")
+    , @NamedQuery(name = "User.findByName", query = "SELECT u FROM User u WHERE u.name = :name")
+    , @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
+    , @NamedQuery(name = "User.findByPhone", query = "SELECT u FROM User u WHERE u.phone = :phone")
+    , @NamedQuery(name = "User.findByStaffID", query = "SELECT u FROM User u WHERE u.staffID = :staffID")
+    , @NamedQuery(name = "User.findByStatusID", query = "SELECT u FROM User u WHERE u.statusID = :statusID")
+    , @NamedQuery(name = "User.findByCreatedBy", query = "SELECT u FROM User u WHERE u.createdBy = :createdBy")
+    , @NamedQuery(name = "User.findBySessionid", query = "SELECT u FROM User u WHERE u.sessionid = :sessionid")})
 public class User implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

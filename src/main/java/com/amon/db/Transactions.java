@@ -26,18 +26,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author FAZOUL
+ * @author amon.sabul
  */
 @Entity
 @Table(name = "transactions")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Transactions.findAll", query = "SELECT t FROM Transactions t"),
-    @NamedQuery(name = "Transactions.findByIdtransactions", query = "SELECT t FROM Transactions t WHERE t.idtransactions = :idtransactions"),
-    @NamedQuery(name = "Transactions.findByCreatedOn", query = "SELECT t FROM Transactions t WHERE t.createdOn = :createdOn"),
-    @NamedQuery(name = "Transactions.findByAmount", query = "SELECT t FROM Transactions t WHERE t.amount = :amount"),
-    @NamedQuery(name = "Transactions.findByMpesastatement", query = "SELECT t FROM Transactions t WHERE t.mpesastatement = :mpesastatement")})
+    @NamedQuery(name = "Transactions.findAll", query = "SELECT t FROM Transactions t")
+    , @NamedQuery(name = "Transactions.findByIdtransactions", query = "SELECT t FROM Transactions t WHERE t.idtransactions = :idtransactions")
+    , @NamedQuery(name = "Transactions.findByCreatedOn", query = "SELECT t FROM Transactions t WHERE t.createdOn = :createdOn")
+    , @NamedQuery(name = "Transactions.findByAmount", query = "SELECT t FROM Transactions t WHERE t.amount = :amount")
+    , @NamedQuery(name = "Transactions.findByMpesastatement", query = "SELECT t FROM Transactions t WHERE t.mpesastatement = :mpesastatement")})
 public class Transactions implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

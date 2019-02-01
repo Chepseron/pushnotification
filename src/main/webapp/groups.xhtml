@@ -45,35 +45,35 @@
                                         <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-8"
                                                      layout="grid" styleClass="ui-fluid card">
                                             <p:outputLabel value="Group Name"/>
-                                            <p:inputText   style="width:200px" required="true" requiredMessage="missing usergroup name"  value="#{acc.usergroup.name}" />
+                                            <p:inputText   style="width:200px" required="true" requiredMessage="missing usergroup name"  value="#{push.usergroup.name}" />
 
 
                                             <p:messages for="userForm"  showDetail="true" />
                                         </p:panelGrid>
                                         <h:panelGrid columns="8">
-                                            <p:commandButton value="LOGOUT"   action="#{acc.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
-                                            <p:commandButton value="SUBMIT"   action="#{acc.createUsergroup}"  icon="fa fa-sign-out" styleClass="btn-primary" />
+                                            <p:commandButton value="LOGOUT"   action="#{push.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
+                                            <p:commandButton value="SUBMIT"   action="#{push.createUsergroup}"  icon="fa fa-sign-out" styleClass="btn-primary" />
                                         </h:panelGrid>
                                     </h:panelGrid>
                                 </h:form>
                             </p:tab>
                             <p:tab title="CREATED GROUPS">
                                 <h:form id="budgetForm" style="width: auto" >
-                                    <p:dataTable var="usergroups" value="#{acc.usergroupList}" 
+                                    <p:dataTable var="usergroups" value="#{push.usergroupList}" 
                                                  paginator="true" rows="10"
                                                  editable="true"
                                                  style="background: transparent; font-size:11px"
                                                  id="activitysTable"
-                                                 emptyMessage="No group found with given criteria" filteredValue="#{acc.usergroupList}">
+                                                 emptyMessage="No group found with given criteria" filteredValue="#{push.usergroupList}">
                                         <p:column filterBy="#{usergroups.name}" sortBy="#{usergroups.name}" headerText="name">
                                             <p:outputLabel value="#{usergroups.name}" />
                                         </p:column>
                                         <p:column filterBy="#{usergroups.responsibilities}" sortBy="#{usergroups.responsibilities}" headerText="Variance">
                                             <p:outputLabel value="#{usergroups.responsibilities}" />
                                         </p:column>
-                                        <p:column style="width:4%">
+                                        <p:column >
                                             <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit" update=":editForm:usergroupDetail" oncomplete="PF('usergroupDialog').show()"  value="DETAILS"   title="Edit  #{usergroups.name}'s DETAILS">                                                  
-                                                <f:setPropertyActionListener value="#{usergroups}"   target="#{acc.usergroup}" />  
+                                                <f:setPropertyActionListener value="#{usergroups}"   target="#{push.usergroup}" />  
                                             </p:commandLink>
                                         </p:column>
                                     </p:dataTable>
@@ -88,19 +88,19 @@
                                         <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-8"
                                                      layout="grid" styleClass="ui-fluid card">
                                             <p:outputLabel value="Group Name"/>
-                                            <p:inputText   style="width:200px" required="true" requiredMessage="missing usergroup name"  value="#{acc.usergroup.name}" />
+                                            <p:inputText   style="width:200px" required="true" requiredMessage="missing usergroup name"  value="#{push.usergroup.name}" />
                                             <p:outputLabel value="Status"/>
-                                            <p:selectOneMenu filter="true" filterMatchMode="startsWith" required="true" requiredMessage="missing status"  converter="#{convertor}"  immediate="true" editable="true" value="#{acc.usergroup.statusID}"  style="width: 200px" >
+                                            <p:selectOneMenu filter="true" filterMatchMode="startsWith" required="true" requiredMessage="missing status"  converter="#{convertor}"  immediate="true" editable="true" value="#{push.usergroup.statusID}"  style="width: 200px" >
                                                 <f:selectItem itemLabel=" " itemValue="" noSelectionOption="true" />
-                                                <f:selectItems value="#{acc.statusList}"  var="usergroup" itemValue="#{usergroup}" itemLabel="#{usergroup.name}" />
+                                                <f:selectItems value="#{push.statusList}"  var="usergroup" itemValue="#{usergroup}" itemLabel="#{usergroup.name}" />
                                             </p:selectOneMenu>
                                             <p:outputLabel value="Roles"/>
-                                            <p:inputTextarea   style="width:200px" required="true" requiredMessage="missing responsibilities"  value="#{acc.usergroup.responsibilities}" />
+                                            <p:inputTextarea   style="width:200px" required="true" requiredMessage="missing responsibilities"  value="#{push.usergroup.responsibilities}" />
                                             <p:messages for="userForm"  showDetail="true" />
                                         </p:panelGrid>
                                         <h:panelGrid columns="8">
-                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{acc.updateUsergroup}" />
-                                            <p:commandButton value="LOGOUT"   action="#{acc.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
+                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{push.updateUsergroup}" />
+                                            <p:commandButton value="LOGOUT"   action="#{push.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
                                         </h:panelGrid>
                                     </h:panelGrid>
 

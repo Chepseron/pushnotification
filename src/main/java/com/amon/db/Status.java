@@ -25,18 +25,19 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
- * @author FAZOUL
+ * @author amon.sabul
  */
 @Entity
 @Table(name = "status")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Status.findAll", query = "SELECT s FROM Status s"),
-    @NamedQuery(name = "Status.findByIdstatus", query = "SELECT s FROM Status s WHERE s.idstatus = :idstatus"),
-    @NamedQuery(name = "Status.findByName", query = "SELECT s FROM Status s WHERE s.name = :name"),
-    @NamedQuery(name = "Status.findByDescription", query = "SELECT s FROM Status s WHERE s.description = :description"),
-    @NamedQuery(name = "Status.findByCreatedBy", query = "SELECT s FROM Status s WHERE s.createdBy = :createdBy")})
+    @NamedQuery(name = "Status.findAll", query = "SELECT s FROM Status s")
+    , @NamedQuery(name = "Status.findByIdstatus", query = "SELECT s FROM Status s WHERE s.idstatus = :idstatus")
+    , @NamedQuery(name = "Status.findByName", query = "SELECT s FROM Status s WHERE s.name = :name")
+    , @NamedQuery(name = "Status.findByDescription", query = "SELECT s FROM Status s WHERE s.description = :description")
+    , @NamedQuery(name = "Status.findByCreatedBy", query = "SELECT s FROM Status s WHERE s.createdBy = :createdBy")})
 public class Status implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

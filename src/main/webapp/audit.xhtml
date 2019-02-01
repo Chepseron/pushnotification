@@ -40,12 +40,12 @@
 
                             <p:tab title="SYSTEM AUDIT">
                                 <h:form  style="width: auto" >
-                                    <p:dataTable var="groups" value="#{acc.auditList}" 
+                                    <p:dataTable var="groups" value="#{push.auditList}" 
                                                  paginator="true" rows="10"
                                                  editable="true"
                                                  style="background: transparent; font-size:11px"
                                                  id="activitysTable"
-                                                 emptyMessage="No audit log found with given criteria" filteredValue="#{acc.auditList}">
+                                                 emptyMessage="No audit log found with given criteria" filteredValue="#{push.auditList}">
                                         <p:column filterBy="#{groups.action}" sortBy="#{groups.action}" headerText="action">
                                             <p:outputLabel value="#{groups.action}" />
                                         </p:column>

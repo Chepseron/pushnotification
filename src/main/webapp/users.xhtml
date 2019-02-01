@@ -45,38 +45,38 @@
                                         <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-8"
                                                      layout="grid" >
                                             <p:outputLabel value="Name"/>
-                                            <p:inputText    value="#{acc.user.name}" />
+                                            <p:inputText    value="#{push.user.name}" />
                                             <p:outputLabel value="Mobile phone"/>
-                                            <p:inputText      value="#{acc.user.phone}" />
+                                            <p:inputText      value="#{push.user.phone}" />
                                             <p:outputLabel value="Staff ID"/>
-                                            <p:inputText      value="#{acc.user.staffID}" />
+                                            <p:inputText      value="#{push.user.staffID}" />
 
                                             <p:outputLabel value="Group ID"/>
-                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{acc.user.groupID}"  style="width: 200px" >
+                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{push.user.groupID}"  style="width: 200px" >
                                                 <f:selectItem itemLabel=" " itemValue="" noSelectionOption="true" />
-                                                <f:selectItems value="#{acc.usergroupList}"  var="group" itemValue="#{group.idgroups}" itemLabel="#{group.name}" />
+                                                <f:selectItems value="#{push.usergroupList}"  var="group" itemValue="#{group.idgroups}" itemLabel="#{group.name}" />
                                             </p:selectOneMenu>
                                             <p:outputLabel value="Username"/>
-                                            <p:inputText      value="#{acc.user.username}" />
+                                            <p:inputText      value="#{push.user.username}" />
                                             <p:outputLabel value="Email address"/>
-                                            <p:inputText    type="email"  value="#{acc.user.email}" />
+                                            <p:inputText    type="email"  value="#{push.user.email}" />
                                             <p:messages for="userForm"  showDetail="true" />
                                         </p:panelGrid>
                                         <h:panelGrid columns="8">
-                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{acc.createUser}" />
-                                            <p:commandButton value="LOGOUT"   action="#{acc.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
+                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{push.createUser}" />
+                                            <p:commandButton value="LOGOUT"   action="#{push.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
                                         </h:panelGrid>
                                     </h:panelGrid>
                                 </h:form>
                             </p:tab>
                             <p:tab title="CREATED USERS">
                                 <h:form id="createdUsers" style="width: auto" >
-                                    <p:dataTable var="users" value="#{acc.userList}" widgetVar="usersTable"
+                                    <p:dataTable var="users" value="#{push.userList}" widgetVar="usersTable"
                                                  paginator="true" rows="10"
 
                                                  style="background: transparent; font-size:11px"
                                                  id="usersTable"
-                                                 emptyMessage="No users found with given criteria" filteredValue="#{acc.userList}">
+                                                 emptyMessage="No users found with given criteria" filteredValue="#{push.userList}">
                                         <p:column filterBy="#{users.name}" sortBy="#{users.name}" headerText="Name">
                                             <p:outputLabel value="#{users.name}" />
                                         </p:column>
@@ -92,14 +92,14 @@
                                         <p:column  sortBy="#{users.groupID}"  filterBy="#{users.groupID}" headerText ="Group">
                                             <p:outputLabel value="#{users.groupID}"  style="display: block; color:GREEN" />
                                         </p:column>
-                                        <p:column style="width:4%">
+                                        <p:column >
                                             <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit" update=":editForm:userDetail" oncomplete="PF('userDialog').show()"  value="DETAILS"   title="Edit  #{users.name}'s DETAILS">                                                  
-                                                <f:setPropertyActionListener value="#{users}"   target="#{acc.user}" />  
+                                                <f:setPropertyActionListener value="#{users}"   target="#{push.user}" />  
                                             </p:commandLink>
                                         </p:column>
-                                        <p:column style="width:4%" headerText="Sessions">
+                                        <p:column  headerText="Sessions">
                                             <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit" update=":editForm:sessionDetail" oncomplete="PF('sessionDialog').show()"  value="DETAILS"   title="Assign  #{users.name}'s to a working session">                                                  
-                                                <f:setPropertyActionListener value="#{users}"   target="#{acc.user}" />  
+                                                <f:setPropertyActionListener value="#{users}"   target="#{push.user}" />  
                                             </p:commandLink>
                                         </p:column>
                                     </p:dataTable>
@@ -112,32 +112,32 @@
                                     <h:panelGrid columns="1">
                                         <h:panelGrid columns="4">
                                             <p:outputLabel value="Name"/>
-                                            <p:inputText    value="#{acc.user.name}" />
+                                            <p:inputText    value="#{push.user.name}" />
                                             <p:outputLabel value="Mobile phone"/>
-                                            <p:inputText      value="#{acc.user.phone}" />
+                                            <p:inputText      value="#{push.user.phone}" />
                                             <p:outputLabel value="Staff ID"/>
-                                            <p:inputText      value="#{acc.user.staffID}" />
+                                            <p:inputText      value="#{push.user.staffID}" />
                                             <p:outputLabel value="Group ID"/>
-                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{acc.user.groupID}"  style="width: 200px" >
+                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{push.user.groupID}"  style="width: 200px" >
                                                 <f:selectItem itemLabel=" " itemValue="" noSelectionOption="true" />
-                                                <f:selectItems value="#{acc.usergroupList}"  var="group" itemValue="#{group.idgroups}" itemLabel="#{group.name}" />
+                                                <f:selectItems value="#{push.usergroupList}"  var="group" itemValue="#{group.idgroups}" itemLabel="#{group.name}" />
                                             </p:selectOneMenu>
                                             <p:outputLabel value="Group ID"/>
-                                            <p:inputText      value="#{acc.user.email}" />
+                                            <p:inputText      value="#{push.user.email}" />
                                             <p:outputLabel value="Username"/>
-                                            <p:inputText      value="#{acc.user.username}" />
+                                            <p:inputText      value="#{push.user.username}" />
                                             <p:outputLabel value="Email address"/>
-                                            <p:inputText      value="#{acc.user.email}" />
+                                            <p:inputText      value="#{push.user.email}" />
                                             <p:outputLabel value="Session"/>
-                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{acc.user.sessionid}"  style="width: 200px" >
+                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{push.user.sessionid}"  style="width: 200px" >
                                                 <f:selectItem itemLabel=" " itemValue="" noSelectionOption="true" />
-                                                <f:selectItems value="#{acc.sessionList}"  var="group" itemValue="#{group.idsession}" itemLabel="#{group.startstime}" />
+                                                <f:selectItems value="#{push.sessionList}"  var="group" itemValue="#{group.idsession}" itemLabel="#{group.startstime}" />
                                             </p:selectOneMenu>
                                             <p:messages for="userForm"  showDetail="true" />
                                         </h:panelGrid>
                                         <h:panelGrid columns="8">
-                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{acc.updateUser()}" />
-                                            <p:commandButton value="LOGOUT"   action="#{acc.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
+                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{push.updateUser()}" />
+                                            <p:commandButton value="LOGOUT"   action="#{push.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
                                         </h:panelGrid>
                                     </h:panelGrid>
                                 </p:outputPanel>
@@ -147,18 +147,18 @@
                                     <h:panelGrid columns="1">
                                         <h:panelGrid columns="4">
                                             <p:outputLabel value="Name"/>
-                                            <p:inputText    value="#{acc.user.name}" />
+                                            <p:inputText    value="#{push.user.name}" />
                                             <p:outputLabel value="Mobile phone"/>
-                                            <p:inputText      value="#{acc.user.phone}" />
+                                            <p:inputText      value="#{push.user.phone}" />
                                             <p:outputLabel value="Session"/>
-                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{acc.user.sessionid}"  style="width: 200px" >
+                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{push.user.sessionid}"  style="width: 200px" >
                                                 <f:selectItem itemLabel=" " itemValue="" noSelectionOption="true" />
-                                                <f:selectItems value="#{acc.sessionList}"  var="group" itemValue="#{group.idsession}" itemLabel="#{group.startstime}" />
+                                                <f:selectItems value="#{push.sessionList}"  var="group" itemValue="#{group.idsession}" itemLabel="#{group.startstime}" />
                                             </p:selectOneMenu>
                                             <p:messages for="userForm"  showDetail="true" />
                                         </h:panelGrid>
                                         <h:panelGrid columns="8">
-                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{acc.updateUser}" />
+                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{push.updateUser}" />
                                         </h:panelGrid>
                                     </h:panelGrid>
                                 </p:outputPanel>

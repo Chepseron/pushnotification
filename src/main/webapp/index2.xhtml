@@ -40,38 +40,40 @@
                                         <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-8"
                                                      layout="grid" >
                                             <p:outputLabel value="Amount"/>
-                                            <p:inputText      value="#{acc.transactions.amount}" />
+                                            <p:inputText      value="#{push.transactions.amount}" />
                                             <p:outputLabel value="Date Created"/>
-                                            <p:inputText      value="#{acc.transactions.createdOn}" />
+                                            <p:calendar  value="#{push.transactions.createdOn}" pages="3" showOn="button">
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                            </p:calendar>
                                             <p:outputLabel value="Statement"/>
-                                            <p:inputTextarea      value="#{acc.transactions.mpesastatement}" />
+                                            <p:inputTextarea      value="#{push.transactions.mpesastatement}" />
                                             <p:outputLabel value="Outlet"/>
-                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{acc.transactions.outletID}"  style="width: 200px" >
+                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{push.transactions.outletID}"  style="width: 200px" >
                                                 <f:selectItem itemLabel=" " itemValue="" noSelectionOption="true" />
-                                                <f:selectItems value="#{acc.outletList}"  var="cat" itemValue="#{cat.outletname}" itemLabel="#{cat.outletname}" />
+                                                <f:selectItems value="#{push.outletList}"  var="cat" itemValue="#{cat}" itemLabel="#{cat.outletname}" />
                                             </p:selectOneMenu>
                                             <p:outputLabel value="Status"/>
-                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{acc.transactions.statusID}"  style="width: 200px" >
+                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{push.transactions.statusID}"  style="width: 200px" >
                                                 <f:selectItem itemLabel=" " itemValue="" noSelectionOption="true" />
-                                                <f:selectItems value="#{acc.statusList}"  var="group" itemValue="#{group.name}" itemLabel="#{group.name}" />
+                                                <f:selectItems value="#{push.statusList}"  var="group" itemValue="#{group}" itemLabel="#{group.name}" />
                                             </p:selectOneMenu>
                                             <p:messages for="transactionsForm"  showDetail="true" />
                                         </p:panelGrid>
                                         <h:panelGrid columns="8">
-                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{acc.createTransaction}" />
-                                            <p:commandButton value="LOGOUT"   action="#{acc.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
+                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{push.createTransaction}" />
+                                            <p:commandButton value="LOGOUT"   action="#{push.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
                                         </h:panelGrid>
                                     </h:panelGrid>
                                 </h:form>
                             </p:tab>
                             <p:tab title="CREATED MPESA TRANSACTIONS">
                                 <h:form id="createdUsers" style="width: auto" >
-                                    <p:dataTable var="transactionss" value="#{acc.transactionsList}" widgetVar="transactionssTable"
+                                    <p:dataTable var="transactionss" value="#{push.transactionsList}" widgetVar="transactionssTable"
                                                  paginator="true" rows="10"
 
                                                  style="background: transparent; font-size:11px"
                                                  id="transactionssTable"
-                                                 emptyMessage="No transactionss found with given criteria" filteredValue="#{acc.transactionsList}">
+                                                 emptyMessage="No transactionss found with given criteria" filteredValue="#{push.transactionsList}">
                                         <p:column filterBy="#{transactionss.createdOn}" sortBy="#{transactionss.createdOn}" headerText="createdOn">
                                             <p:outputLabel value="#{transactionss.createdOn}" />
                                         </p:column>
@@ -84,10 +86,10 @@
                                         <p:column filterBy="#{transactionss.mpesastatement}" sortBy="#{transactionss.mpesastatement}" headerText="Statement">
                                             <p:outputLabel value="#{transactionss.mpesastatement}" />
                                         </p:column>
-                                      
-                                        <p:column style="width:4%">
-                                            <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit" update=":editForm:transactionsDetail" oncomplete="PF('transactionsDialog').show()"  value="DETAILS"   title="Edit  #{transactionss.amount}'s DETAILS">                                                  
-                                                <f:setPropertyActionListener value="#{transactionss}"   target="#{acc.transactions}" />  
+
+                                        <p:column>
+                                            <p:commandLink process="@this" styleClass="si-icon-16x16 si-icon-edit" update=":editForm:transactionsDetail" oncomplete="PF('transactionsDialog').show()"  value="PUSH"   title="Edit  #{transactionss.amount}'s DETAILS">                                                  
+                                                <f:setPropertyActionListener value="#{transactionss}"   target="#{push.transactions}" />  
                                             </p:commandLink>
                                         </p:column>
                                     </p:dataTable>
@@ -101,26 +103,28 @@
                                         <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-8"
                                                      layout="grid" >
                                             <p:outputLabel value="Amount"/>
-                                            <p:inputText      value="#{acc.transactions.amount}" />
+                                            <p:inputText      value="#{push.transactions.amount}" />
                                             <p:outputLabel value="Date Created"/>
-                                            <p:inputText      value="#{acc.transactions.createdOn}" />
+                                            <p:calendar      value="#{push.transactions.createdOn}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                            </p:calendar>
                                             <p:outputLabel value="Statement"/>
-                                            <p:inputTextarea      value="#{acc.transactions.mpesastatement}" />
+                                            <p:inputTextarea      value="#{push.transactions.mpesastatement}" />
                                             <p:outputLabel value="Outlet"/>
-                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{acc.transactions.outletID}"  style="width: 200px" >
+                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{push.transactions.outletID}"  style="width: 200px" >
                                                 <f:selectItem itemLabel=" " itemValue="" noSelectionOption="true" />
-                                                <f:selectItems value="#{acc.outletList}"  var="cat" itemValue="#{cat.outletname}" itemLabel="#{cat.outletname}" />
+                                                <f:selectItems value="#{push.outletList}"  var="cat" itemValue="#{cat}" itemLabel="#{cat.outletname}" />
                                             </p:selectOneMenu>
                                             <p:outputLabel value="Status"/>
-                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{acc.transactions.statusID}"  style="width: 200px" >
+                                            <p:selectOneMenu    converter="#{convertor}" immediate="true"  value="#{push.transactions.statusID}"  style="width: 200px" >
                                                 <f:selectItem itemLabel=" " itemValue="" noSelectionOption="true" />
-                                                <f:selectItems value="#{acc.statusList}"  var="group" itemValue="#{group.name}" itemLabel="#{group.name}" />
+                                                <f:selectItems value="#{push.statusList}"  var="group" itemValue="#{group}" itemLabel="#{group.name}" />
                                             </p:selectOneMenu>
                                             <p:messages for="transactionsForm"  showDetail="true" />
                                         </p:panelGrid>
                                         <h:panelGrid columns="8">
-                                            <p:commandButton value="SUBMIT"  icon="fa fa-plus" styleClass="btn-primary"  action="#{acc.updateTransaction}" />
-                                            <p:commandButton value="LOGOUT"   action="#{acc.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
+                                            <p:commandButton value="PUSH"  icon="fa fa-plus" styleClass="btn-primary"  action="#{push.updateTransaction}" />
+                                            <p:commandButton value="LOGOUT"   action="#{push.logout}"  icon="fa fa-sign-out" styleClass="btn-primary" />
                                         </h:panelGrid>
                                     </h:panelGrid>
                                 </p:outputPanel>

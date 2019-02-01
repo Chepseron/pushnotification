@@ -29,19 +29,20 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
- * @author FAZOUL
+ * @author amon.sabul
  */
 @Entity
 @Table(name = "outlet")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Outlet.findAll", query = "SELECT o FROM Outlet o"),
-    @NamedQuery(name = "Outlet.findByIdoutlet", query = "SELECT o FROM Outlet o WHERE o.idoutlet = :idoutlet"),
-    @NamedQuery(name = "Outlet.findByCreatedBy", query = "SELECT o FROM Outlet o WHERE o.createdBy = :createdBy"),
-    @NamedQuery(name = "Outlet.findByCreatedOn", query = "SELECT o FROM Outlet o WHERE o.createdOn = :createdOn"),
-    @NamedQuery(name = "Outlet.findByOutletname", query = "SELECT o FROM Outlet o WHERE o.outletname = :outletname"),
-    @NamedQuery(name = "Outlet.findByAddress", query = "SELECT o FROM Outlet o WHERE o.address = :address")})
+    @NamedQuery(name = "Outlet.findAll", query = "SELECT o FROM Outlet o")
+    , @NamedQuery(name = "Outlet.findByIdoutlet", query = "SELECT o FROM Outlet o WHERE o.idoutlet = :idoutlet")
+    , @NamedQuery(name = "Outlet.findByCreatedBy", query = "SELECT o FROM Outlet o WHERE o.createdBy = :createdBy")
+    , @NamedQuery(name = "Outlet.findByCreatedOn", query = "SELECT o FROM Outlet o WHERE o.createdOn = :createdOn")
+    , @NamedQuery(name = "Outlet.findByOutletname", query = "SELECT o FROM Outlet o WHERE o.outletname = :outletname")
+    , @NamedQuery(name = "Outlet.findByAddress", query = "SELECT o FROM Outlet o WHERE o.address = :address")})
 public class Outlet implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
