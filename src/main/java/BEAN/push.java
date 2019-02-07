@@ -261,7 +261,7 @@ public class push implements Serializable {
 
     private String sendGet(String stmt) throws Exception {
         endpoint = (Endpoint) em.createQuery("select e from Endpoint e where e.endpointName = 'PRINTER'").getSingleResult();
-        String ip = endpoint.getEndpointName();
+        String ip = endpoint.getUrltoendpoint();
         startConnection(ip, 11000);
         String response = sendMessage(stmt);
         return response;
